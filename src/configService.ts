@@ -16,7 +16,7 @@ const schema = {
             type: 'object',
             properties: {
                 name: { type: 'string' },
-                url: { type: 'string', format: 'url' },
+                url: { type: 'string' },
                 default: { type: 'boolean' }
             },
             required: ['name', 'url']
@@ -44,6 +44,7 @@ const config = new Conf<ConfigStore>({
     }
 });
 
+console.log('[DEBUG] Config file path:', config.path); // Temporary debug line
 
 export function addServer(name: string, url: string): void {
     const servers = config.get('servers', []);
