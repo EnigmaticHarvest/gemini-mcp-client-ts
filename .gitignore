@@ -1,0 +1,6 @@
+node_modules
+dist
+.env
+*.log
+config.json # If using 'conf' library default
+
