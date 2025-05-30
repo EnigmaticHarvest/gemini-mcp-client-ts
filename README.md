@@ -117,5 +117,3 @@ npm run cli -- chat
     ```
 
 ---
-
-This README provides a basic guide. You can expand it with more details as the CLI evolves. 
