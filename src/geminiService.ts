@@ -15,6 +15,7 @@ import {
     DynamicGeminiToolMapping
 } from './mcpToolRegistry.js';
 import { GenericMcpClient } from './mcpClientService.js';
+import { processUserInput } from './userInputParser.js'; // Import the new function
 import chalk from 'chalk';
 
 if (!GEMINI_API_KEY) {
@@ -89,10 +90,11 @@ export async function sendMessageToGemini(
     userInput: string
 ): Promise<string> {
     console.log(chalk.yellow(`\nUser: ${userInput}`));
+
+    let currentMessageForGemini: string | Part[] = await processUserInput(userInput);
+
     let attempt = 0;
     const maxAttempts = 5; // Max attempts for tool calling loop
-
-    let currentMessageForGemini: string | Part[] = userInput;
 
     while (attempt < maxAttempts) {
         attempt++;
