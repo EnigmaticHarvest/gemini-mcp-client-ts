@@ -13,6 +13,7 @@ import {
     sendMessageToGemini
 } from './geminiService.js';
 import { discoverAndMapAllMcpTools } from './mcpToolRegistry.js';
+import { processUserInput } from './userInputParser.js';
 import './envConfig.js'; // Loads .env and checks for GEMINI_API_KEY
 
 const program = new Command();
@@ -92,7 +93,10 @@ program
                 }
                 if (!userInput.trim()) continue;
 
-                await sendMessageToGemini(chatSession, userInput);
+                console.log(chalk.yellow(`\nUser: ${userInput}`));
+
+                const processedMessage = await processUserInput(userInput);
+                await sendMessageToGemini(chatSession, processedMessage);
             }
         } catch (error: any) {
             console.error(chalk.red(`Chat session error: ${error.message}`));

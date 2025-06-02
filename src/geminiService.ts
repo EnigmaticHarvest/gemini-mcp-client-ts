@@ -15,7 +15,6 @@ import {
     DynamicGeminiToolMapping
 } from './mcpToolRegistry.js';
 import { GenericMcpClient } from './mcpClientService.js';
-import { processUserInput } from './userInputParser.js'; // Import the new function
 import chalk from 'chalk';
 
 if (!GEMINI_API_KEY) {
@@ -87,11 +86,12 @@ export async function startChatSession(): Promise<ChatSession> {
 
 export async function sendMessageToGemini(
     chatSession: ChatSession,
-    userInput: string
+    processedMessage: string | Part[]
 ): Promise<string> {
-    console.log(chalk.yellow(`\nUser: ${userInput}`));
+    // console.log(chalk.yellow(`\nUser: ${userInput}`)); // Removed: Raw user input logged in index.ts
 
-    let currentMessageForGemini: string | Part[] = await processUserInput(userInput);
+    let currentMessageForGemini: string | Part[] = processedMessage; // Use the processed message directly
+    // REMOVE: const currentMessageForGemini: string | Part[] = await processUserInput(userInput);
 
     let attempt = 0;
     const maxAttempts = 5; // Max attempts for tool calling loop
