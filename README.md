@@ -74,6 +74,7 @@ npm run cli -- chat
 
 During the chat:
 *   Type your message and press Enter.
+*   To reference a local file in your message, use the format `localfile(path/to/your/file.ext)`. The content of the file will be read, base64 encoded, and sent to Gemini.
 *   If MCP servers are configured and tools are discovered, Gemini may use these tools to respond to your queries.
 *   Type `exit` or `quit` to end the chat session.
 
